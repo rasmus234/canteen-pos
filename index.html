@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>CanteenLatest</title>
+    <script type="module" src="src/index.ts"></script>
+</head>
+
+<body style="height: 100%;">
+<div class="container-fluid" style="height: 100%;">
+    <div class="row sticky-top bg-light" style="height: auto;margin: 0 0 10px 0;">
+        <div class="col sticky-top">
+            <nav class="navbar navbar-light navbar-expand-md sticky-top">
+                <div class="container-fluid"><a class="navbar-brand" href="#">Canteen</a>
+                    <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
+                            class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="nav-text-items">
+                            <li class="nav-item" id="nav-total-price">Total price:</li>
+                            <li class="nav-item" id="nav-item-count">Items:</li>
+                            <li class="nav-item" id="nav-employee-name">Logged in as:</li>
+                        </ul>
+                    </div>
+                    <button id="logout-button" class="btn btn-warning" type="button" data-bs-toggle="offcanvas"
+                            style="margin-right: 10px;">Log out
+
+                    </button>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvas-1">Show Shopping cart
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row" style="height: auto;">
+        <div class="col-auto" style="height: 100%;">
+            <div class="btn-group-vertical btn-group-lg" role="group" style="width: 100%;">
+
+                <button class="btn btn-primary filter" id="breakfast-button" type="button">Breakfast
+                </button>
+                <button class="btn btn-primary filter" id="beverages-button" type="button">Beverages
+                </button>
+                <button class="btn btn-primary filter" id="fruit-button" type="button">Fruits
+                </button>
+                </button>
+                <button class="btn btn-primary filter" id="cake-button" type="button">Cakes
+                </button>
+                <button class="btn btn-primary filter" id="favourite-button" type="button">Favourites
+                </button>
+            </div>
+        </div>
+        <div class="col" id="menu-items-div" style="padding-right: 0px;padding-left: 0px;padding-bottom: 0px;"></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="offcanvas offcanvas-bottom" tabindex="-1" data-bs-scroll="true" id="offcanvas-1">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">Shopping cart</h5>
+                    <button id="checkout-button" class="btn btn-primary float-end" type="button"
+                            style="background: green;">Checkout
+                    </button>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body" id="shopping-cart-body"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>
