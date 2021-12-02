@@ -15,6 +15,7 @@ export function createMenuItem(menuItem: MenuItem) {
 
     buttonElement.className = "btn btn-primary btn-lg menu-item";
     buttonElement.type = "button";
+    
 
     buttonElement.setAttribute("data-category", menuItem.category);
     buttonElement.setAttribute("data-price", String(menuItem.price));
@@ -29,6 +30,7 @@ export function createMenuItem(menuItem: MenuItem) {
 
     buttonElement.addEventListener("click", (ev) => {
         createShoppingCartItem(buttonElement);
+        move(buttonElement);
     })
 
     const menuItems = document.getElementById('menu-items-div') as HTMLDivElement;
@@ -36,6 +38,25 @@ export function createMenuItem(menuItem: MenuItem) {
     buttonElement.append(spanElement);
     menuItems.append(buttonElement);
     return buttonElement;
+}
+
+function move(element: HTMLElement) {
+    var id = null;
+    var elem = element.cloneNode(true) as HTMLElement;
+    element.append(elem);
+    var pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 1);
+    function frame() {
+        if (pos == 400) {
+            elem.remove()
+        } else {
+            pos = pos + 10;
+            elem.style.bottom = pos + 'px';
+            elem.style.left = pos*4 + 'px';
+            
+        }
+    }
 }
 
 export function filterButtonsByCategory(category: string) {
