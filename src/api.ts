@@ -2,9 +2,10 @@ import {MenuItem} from "./menuItem";
 import {currentEmployee} from "./index";
 import {Employee} from "./employee";
 
+const baseUrl = "https://canteenapi.herokuapp.com/api/"
 
 export async function login(id: number, password: string): Promise<string> {
-    let response = await fetch("https://canteen-easv.herokuapp.com/api/login", {
+    let response = await fetch(baseUrl + "login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -19,7 +20,7 @@ export async function login(id: number, password: string): Promise<string> {
 
 export async function loginWithPassword(password: string): Promise<Employee> {
     console.log("logging in with password");
-    let response = await fetch("https://canteen-easv.herokuapp.com/rfid", {
+    let response = await fetch(baseUrl+"login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -36,7 +37,7 @@ export async function loginWithPassword(password: string): Promise<Employee> {
 
 export async function getMenuItems(): Promise<MenuItem[]> {
     let items: MenuItem[] = [];
-    await fetch("https://canteen-easv.herokuapp.com/api/Items", {
+    await fetch(baseUrl+"items", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -54,7 +55,7 @@ export async function postOrder(menuItems: MenuItem[]) {
 
     const itemIds = menuItems.map(item => item.itemId);
     let response;
-    await fetch("https://canteen-easv.herokuapp.com/api/Orders", {
+    await fetch(baseUrl+"Orders", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
