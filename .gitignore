@@ -1,5 +1,4 @@
-/node_modules/
+/node_modules
 /dist
-
-/.idea/canteen-pos.iml
-/.parcel-cache/
+/.idea
+/.parcel-cache
