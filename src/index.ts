@@ -16,7 +16,8 @@ loginWithPassword(password).then(employee => {
 
     if(employee){
         currentEmployee = employee;
-        console.log(employee);
+        console.log("currentemployee")
+        console.log(currentEmployee);
         initMenuItems();
         refreshNavBar();
     }
