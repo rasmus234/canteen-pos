@@ -20,7 +20,7 @@ export async function login(id: number, password: string): Promise<string> {
 
 export async function loginWithPassword(password: string): Promise<Employee> {
     console.log("logging in with password");
-    let response = await fetch(baseUrl+"login", {
+    let response = await fetch("https://canteenapi.herokuapp.com/"+"rfid", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
