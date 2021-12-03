@@ -4,7 +4,13 @@
   width: 25%;
   height: 25%;
   float: left;
-  position:relative;
+  position: absolute;
+  transition: left 200ms ease-out, top 200ms ease-out, width 200ms ease-out, height 200ms ease-out;
+}
+#shopping-cart{
+  height:50px;
+  width: 100px;
+  
 }
 
 
@@ -35,13 +41,17 @@
 .nav-item{
   align-content: center;
   justify-content: center;;
-  margin-left: 50px;
-  margin-right: 100px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 #nav-text-items{
-  margin-left: 50px;
-  margin-right: 100px;
+  
+  margin-left: 10%;
+  margin-right: 10%;
   font-size: 2rem
+}
+#navcol-1{
+  height: 150px;
 }
 
 

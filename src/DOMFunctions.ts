@@ -1,7 +1,7 @@
 import {shoppingCart} from "./DOMElements";
 import {MenuItem} from "./menuItem";
 import {currentEmployee} from "./index";
-
+import * as $ from "jquery";
 const blobPrefix = "data:image/png;base64,"
 
 
@@ -15,8 +15,8 @@ export function createMenuItem(menuItem: MenuItem) {
 
     buttonElement.className = "btn btn-primary btn-lg menu-item";
     buttonElement.type = "button";
-    
 
+    
     buttonElement.setAttribute("data-category", menuItem.category);
     buttonElement.setAttribute("data-price", String(menuItem.price));
     buttonElement.setAttribute("data-item-id", String(menuItem.itemId));
@@ -30,7 +30,8 @@ export function createMenuItem(menuItem: MenuItem) {
 
     buttonElement.addEventListener("click", (ev) => {
         createShoppingCartItem(buttonElement);
-        move(buttonElement);
+        itemChosenEffect(buttonElement, buttonElement.offsetLeft, buttonElement.offsetTop);
+        updateCounter();
     })
 
     const menuItems = document.getElementById('menu-items-div') as HTMLDivElement;
@@ -39,24 +40,54 @@ export function createMenuItem(menuItem: MenuItem) {
     menuItems.append(buttonElement);
     return buttonElement;
 }
+function updateCounter(){
+    //Nothing here :)
+}
 
-function move(element: HTMLElement) {
-    var id = null;
-    var elem = element.cloneNode(true) as HTMLElement;
-    element.append(elem);
-    var pos = 0;
-    clearInterval(id);
-    id = setInterval(frame, 1);
-    function frame() {
-        if (pos == 400) {
-            elem.remove()
-        } else {
-            pos = pos + 10;
-            elem.style.bottom = pos + 'px';
-            elem.style.left = pos*4 + 'px';
-            
-        }
-    }
+function itemChosenEffect(element: HTMLElement, x,y) {
+    //Make a copy of the element
+    let elemClone = element.cloneNode(false) as HTMLElement;
+    element.append(elemClone);
+    
+    elemClone.style.width = element.offsetWidth + "px";
+    elemClone.style.height = element.offsetHeight + "px";
+    
+    //Set Initial position
+    elemClone.style.left = x + "px";
+    elemClone.style.top = y + "px";
+    
+    
+    document.body.append(elemClone);
+    elemClone.style.zIndex = "9999";
+    //Get target coordinates and size
+    let xT = document.getElementById('shopping-cart').offsetLeft;
+    let yT = document.getElementById('shopping-cart').offsetTop;
+    let wT = document.getElementById('shopping-cart').offsetWidth;
+    let hT = document.getElementById('shopping-cart').offsetHeight;
+    
+   
+    
+    //Set target coordinates and size, CSS will handle the animation
+    elemClone.style.left = xT + 'px';
+    elemClone.style.top = yT + 'px';
+    elemClone.style.width = wT + 'px';
+    elemClone.style.height = hT + 'px';
+    
+
+    //On transition end, do a shopping cart animation
+    let i = 0;
+    elemClone.addEventListener('transitionend', () => {
+        i++;
+        if (i < 3){return;}
+        elemClone.remove();
+        
+        $( "#shopping-cart" ).toggle(150, function() {
+            // Animation complete.
+          });
+        
+        
+    });
+    
 }
 
 export function filterButtonsByCategory(category: string) {
@@ -142,8 +173,8 @@ export function refreshNavBar(): void {
     const itemCount = document.getElementById("nav-item-count");
     const employeeName = document.getElementById("nav-employee-name");
 
-    employeeName.textContent = "Logged in as: " + currentEmployee.name
-    totalPrice.textContent = "Total price: " + getTotalPrice();
+    employeeName.textContent = "User: " + currentEmployee.name
+    totalPrice.textContent = "Total: " + getTotalPrice();
     itemCount.textContent = "Items: " + getTotalItems();
 
 }

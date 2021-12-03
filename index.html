@@ -21,18 +21,23 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="nav-text-items">
                             <li class="nav-item" id="nav-total-price">Total:</li>
                             <li class="nav-item" id="nav-item-count">Items:</li>
-                            <li class="nav-item" id="nav-employee-name">User:</li>
                         </ul>
                     </div>
-                    <button id="logout-button" class="btn btn-warning" type="button" data-bs-toggle="offcanvas"
-                            style="margin-right: 10px;height:50px;width: 100px;">
-                        <span style="height:80%;">Log out</span>
+                    <div class="col-md-3">
+                        <span id ="nav-employee-name" >User:</span>
+                        <div>
+                            <button id="logout-button" class="btn btn-warning" type="button" data-bs-toggle="offcanvas"
+                                    style="margin-right: 10px;height:50px;width: 100px;">
+                                <span style="height:80%;">Log out</span>
 
-                    </button>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvas-1" style="height:50px;width: 100px;">
-                        <img src="img/cart.png" style="height:80%;">
-                    </button>
+                            </button>
+                            <button class="btn btn-primary" id="shopping-cart" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvas-1">
+                                <img src="img/cart.png" style="height:80%;">
+                            </button>
+                        </div>
+                    </div>
+                    
                 </div>
             </nav>
         </div>
