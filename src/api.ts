@@ -3,24 +3,12 @@ import {currentEmployee} from "./index";
 import {Employee} from "./employee";
 
 const baseUrl = "https://canteenapi.herokuapp.com/api/"
+const baseUrlLocal = "https://localhost:7117/api/"
 
-export async function login(id: number, password: string): Promise<string> {
-    let response = await fetch(baseUrl + "login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({password: password, id: id})
-    });
-
-    if (response.status === 401) {
-        return "";
-    } else return response.text();
-}
 
 export async function loginWithPassword(password: string): Promise<Employee> {
     console.log("logging in with password");
-    let response = await fetch("https://canteenapi.herokuapp.com/"+"rfid", {
+    let tokenResponse = await fetch(baseUrl+"login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -28,11 +16,29 @@ export async function loginWithPassword(password: string): Promise<Employee> {
         body: JSON.stringify({password: password})
     });
 
-    if (response.status === 401) {
+    if (tokenResponse.status === 401) {
         return null;
     }
-    const json = await response.json();
-    return new Employee(json.employeeId, json.name, json.token, json.employeeCakes, json.items);
+    const token = await tokenResponse.json().then(data => data.token);
+    console.log(token);
+
+    const employee = getEmployeeFromToken(token);
+
+    return employee;
+}
+
+export async function getEmployeeFromToken(token: string): Promise<Employee> {
+    let employee;
+    let employeeResponse = await fetch(baseUrlLocal + "Employees/token", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        }
+    }).then(response => response.json().then(json => employee = json))
+        .catch(error => console.log(error));
+
+    return new Employee(employee.employeeId, employee.firstName + " " + employee.lastName, token, employee.employeeCakes, employee.favouriteItems);
 }
 
 export async function getMenuItems(): Promise<MenuItem[]> {
