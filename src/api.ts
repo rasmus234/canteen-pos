@@ -1,4 +1,4 @@
-import {MenuItem} from "./menuItem";
+
 import {currentEmployee} from "./index";
 import {Employee, Item} from "./models";
 
@@ -45,6 +45,7 @@ export async function getEmployeeFromToken(token: string): Promise<Employee> {
 }
 
 export async function getMenuItems(): Promise<Item[]> {
+    console.log("getting menu items");
     let items: Item[] = [];
     await fetch(baseUrl+"items", {
         method: "GET",
@@ -60,7 +61,7 @@ export async function getMenuItems(): Promise<Item[]> {
     return items;
 }
 
-export async function postOrder(menuItems: MenuItem[]) {
+export async function postOrder(menuItems: Item[]) {
 
     const itemIds = menuItems.map(item => item.itemId);
     let response;

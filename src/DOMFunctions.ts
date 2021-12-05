@@ -1,11 +1,11 @@
 import {shoppingCart} from "./DOMElements";
-import {MenuItem} from "./menuItem";
+import {Item, OrderItem} from "./models";
 import {currentEmployee} from "./index";
 import * as $ from "jquery";
 const blobPrefix = "data:image/png;base64,"
 
 
-export function createMenuItem(menuItem: MenuItem) {
+export function createMenuItem(menuItem: Item) {
     let buttonElement: HTMLButtonElement = document.createElement("button");
     let spanElement: HTMLSpanElement = document.createElement("span");
     let imageElement: HTMLImageElement = document.createElement("img");
@@ -16,8 +16,7 @@ export function createMenuItem(menuItem: MenuItem) {
     buttonElement.className = "btn btn-primary btn-lg menu-item";
     buttonElement.type = "button";
 
-    
-    buttonElement.setAttribute("data-category", menuItem.category);
+    buttonElement.setAttribute("data-category", menuItem.category.name);
     buttonElement.setAttribute("data-price", String(menuItem.price));
     buttonElement.setAttribute("data-item-id", String(menuItem.itemId));
     if (currentEmployee.items.map(value => value.itemId).includes(menuItem.itemId)) {
@@ -93,7 +92,7 @@ function itemChosenEffect(element: HTMLElement, x,y) {
 export function filterButtonsByCategory(category: string) {
     const buttons = document.getElementsByClassName('menu-item') as unknown as HTMLButtonElement[];
 
-    if (category === "data-favourite"){
+    if (category === "favourite"){
         for (let i = 0; i < buttons.length; i++) {
             if (buttons[i].getAttribute("data-favourite") === "true") {
                 buttons[i].style.display = "block";
@@ -108,7 +107,7 @@ export function filterButtonsByCategory(category: string) {
 
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].getAttribute("data-category").toLowerCase() == category.toLowerCase()) {
-            buttons[i].style.display = "inline";
+            buttons[i].style.display = "block";
         } else {
             buttons[i].style.display = "none";
         }
@@ -151,15 +150,17 @@ export function getTotalItems(): number {
 }
 
 
-export function getShoppingCartItems(): MenuItem[] {
-    let items: MenuItem[] = [];
+export function getShoppingCartItems(): Item[] {
+    let items: Item[] = [];
     const shoppingCartItems = document.getElementsByClassName('shopping-cart-item') as unknown as HTMLButtonElement[];
     for (let i = 0; i < shoppingCartItems.length; i++) {
-        let item: MenuItem = {
+        let item: Item = {
             itemId: parseInt(shoppingCartItems[i].getAttribute("data-item-id")),
             name: shoppingCartItems[i].children[1].textContent,
             price: parseFloat(shoppingCartItems[i].getAttribute("data-price")),
-            category: shoppingCartItems[i].getAttribute("data-category"),
+            category: {
+                name: shoppingCartItems[i].getAttribute("data-category")
+            },
             image: (shoppingCartItems[i].children[0] as HTMLImageElement).src.replace(blobPrefix, "")
         }
         items.push(item);
@@ -169,11 +170,12 @@ export function getShoppingCartItems(): MenuItem[] {
 
 
 export function refreshNavBar(): void {
+    console.log("refreshNavBar",currentEmployee);
     const totalPrice = document.getElementById("nav-total-price");
     const itemCount = document.getElementById("nav-item-count");
     const employeeName = document.getElementById("nav-employee-name");
 
-    employeeName.textContent = "User: " + currentEmployee.name
+    employeeName.textContent = "User: " + currentEmployee.firstName + " " + currentEmployee.lastName;
     totalPrice.textContent = "Total: " + getTotalPrice();
     itemCount.textContent = "Items: " + getTotalItems();
 
