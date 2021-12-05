@@ -1,6 +1,6 @@
 import {MenuItem} from "./menuItem";
 import {currentEmployee} from "./index";
-import {Employee} from "./employee";
+import {Employee} from "./models";
 
 const baseUrl = "https://canteenapi.herokuapp.com/api/"
 const baseUrlLocal = "https://localhost:7117/api/"
@@ -28,8 +28,8 @@ export async function loginWithPassword(password: string): Promise<Employee> {
 }
 
 export async function getEmployeeFromToken(token: string): Promise<Employee> {
-    let employee;
-    let employeeResponse = await fetch(baseUrlLocal + "Employees/token", {
+    let employee: Employee;
+    let employeeResponse = await fetch(baseUrl + "Employees/token", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -38,7 +38,8 @@ export async function getEmployeeFromToken(token: string): Promise<Employee> {
     }).then(response => response.json().then(json => employee = json))
         .catch(error => console.log(error));
 
-    return new Employee(employee.employeeId, employee.firstName + " " + employee.lastName, token, employee.employeeCakes, employee.favouriteItems);
+
+    return employee;
 }
 
 export async function getMenuItems(): Promise<MenuItem[]> {
