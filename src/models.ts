@@ -9,11 +9,11 @@ export interface Employee {
     employeeId?: number;
     firstName?: string | undefined;
     lastName?: string | undefined;
-    password?: string | undefined;
     employeeCakes?: EmployeeCake[] | undefined;
     employeeLunches?: EmployeeLunch[] | undefined;
     orders?: Order[] | undefined;
     items?: Item[] | undefined;
+    token?: string | undefined;
 }
 
 export interface EmployeeCake {

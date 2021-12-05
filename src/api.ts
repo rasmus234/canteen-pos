@@ -1,6 +1,6 @@
 import {MenuItem} from "./menuItem";
 import {currentEmployee} from "./index";
-import {Employee} from "./models";
+import {Employee, Item} from "./models";
 
 const baseUrl = "https://canteenapi.herokuapp.com/api/"
 const baseUrlLocal = "https://localhost:7117/api/"
@@ -8,6 +8,7 @@ const baseUrlLocal = "https://localhost:7117/api/"
 
 export async function loginWithPassword(password: string): Promise<Employee> {
     console.log("logging in with password");
+    console.log("ye")
     let tokenResponse = await fetch(baseUrl+"login", {
         method: "POST",
         headers: {
@@ -21,8 +22,10 @@ export async function loginWithPassword(password: string): Promise<Employee> {
     }
     const token = await tokenResponse.json().then(data => data.token);
     console.log(token);
+    console.log("logged in");
 
-    const employee = getEmployeeFromToken(token);
+    const employee = await getEmployeeFromToken(token);
+    employee.token = token;
 
     return employee;
 }
@@ -38,12 +41,11 @@ export async function getEmployeeFromToken(token: string): Promise<Employee> {
     }).then(response => response.json().then(json => employee = json))
         .catch(error => console.log(error));
 
-
     return employee;
 }
 
-export async function getMenuItems(): Promise<MenuItem[]> {
-    let items: MenuItem[] = [];
+export async function getMenuItems(): Promise<Item[]> {
+    let items: Item[] = [];
     await fetch(baseUrl+"items", {
         method: "GET",
         headers: {
@@ -52,8 +54,8 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         },
     })
         .then(data => data.json())
-        .then(data => data.map((data: MenuItem) =>
-            items.push(new MenuItem(data.itemId, data.name, data.price, data.category, data.image))));
+        .then(data => data.map((data: Item) =>
+            items.push(data)))
 
     return items;
 }
