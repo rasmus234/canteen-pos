@@ -79,7 +79,7 @@ export async function postOrder(menuItems: Item[]) {
 export async function getCurrentMenu(): Promise<LunchMenu> {
 
     let response;
-    await fetch(baseUrl+"LunchMenus", {
+    await fetch(baseUrl+"LunchMenus/current", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

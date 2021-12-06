@@ -26,13 +26,10 @@ export function createMenuItem(menuItem: Item) {
     buttonElement.setAttribute("data-item-id", String(menuItem.itemId));
 
     const favouriteItemIds = (currentEmployee as Employee).items
-    console.log(favouriteItemIds);
     if (favouriteItemIds.includes(menuItem.itemId)) {
-        console.log("is favourite")
         buttonElement.setAttribute("data-favourite","true")
     }
     else {
-        console.log("is not favourite")
         buttonElement.setAttribute("data-favourite","false")
     }
 
@@ -108,7 +105,6 @@ export function filterButtonsByCategory(category: string) {
     let test:HTMLButtonElement[] = document.getElementsByClassName('lunch-item') as unknown as HTMLButtonElement[];
 
     buttons = [...buttons, ...test];
-    console.log("filter called with" , category);
 
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].getAttribute("data-category").toLowerCase() == category.toLowerCase()) {
@@ -118,7 +114,6 @@ export function filterButtonsByCategory(category: string) {
         }
     }
     if (category === "favourite"){
-        console.log("favourite");
         for (let i = 0; i < buttons.length; i++) {
             if (buttons[i].getAttribute("data-favourite") === "true") {
                 buttons[i].style.display = "block";
