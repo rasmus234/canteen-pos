@@ -1,5 +1,5 @@
 import {shoppingCart} from "./DOMElements";
-import {Item, OrderItem} from "./models";
+import {Item, OrderItem,Employee} from "./models";
 import {currentEmployee} from "./index";
 import * as $ from "jquery";
 const blobPrefix = "data:image/png;base64,"
@@ -24,10 +24,15 @@ export function createMenuItem(menuItem: Item) {
     buttonElement.setAttribute("data-category", menuItem.category.name);
     buttonElement.setAttribute("data-price", String(menuItem.price));
     buttonElement.setAttribute("data-item-id", String(menuItem.itemId));
-    if (currentEmployee.items.map(value => value.itemId).includes(menuItem.itemId)) {
+
+    const favouriteItemIds = (currentEmployee as Employee).items
+    console.log(favouriteItemIds);
+    if (favouriteItemIds.includes(menuItem.itemId)) {
+        console.log("is favourite")
         buttonElement.setAttribute("data-favourite","true")
     }
     else {
+        console.log("is not favourite")
         buttonElement.setAttribute("data-favourite","false")
     }
 
@@ -99,22 +104,11 @@ function itemChosenEffect(element: HTMLElement, x,y) {
 }
 
 export function filterButtonsByCategory(category: string) {
-    const buttons = document.getElementsByClassName('menu-item') as unknown as HTMLButtonElement[];
+    let buttons:HTMLButtonElement[] = document.getElementsByClassName('menu-item') as unknown as HTMLButtonElement[];
+    let test:HTMLButtonElement[] = document.getElementsByClassName('lunch-item') as unknown as HTMLButtonElement[];
 
-    if (category === "favourite"){
-        for (let i = 0; i < buttons.length; i++) {
-            if (buttons[i].getAttribute("data-favourite") === "true") {
-                buttons[i].style.display = "block";
-            }
-            else {
-                buttons[i].style.display = "none";
-            }
-        }
-        return;
-    }
-
-    
-
+    buttons = [...buttons, ...test];
+    console.log("filter called with" , category);
 
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].getAttribute("data-category").toLowerCase() == category.toLowerCase()) {
@@ -122,6 +116,15 @@ export function filterButtonsByCategory(category: string) {
         } else {
             buttons[i].style.display = "none";
         }
+    }
+    if (category === "favourite"){
+        console.log("favourite");
+        for (let i = 0; i < buttons.length; i++) {
+            if (buttons[i].getAttribute("data-favourite") === "true") {
+                buttons[i].style.display = "block";
+            }
+        }
+        return;
     }
     
 }
@@ -182,7 +185,6 @@ export function getShoppingCartItems(): Item[] {
 
 
 export function refreshNavBar(): void {
-    console.log("refreshNavBar",currentEmployee);
     const totalPrice = document.getElementById("nav-total-price");
     const itemCount = document.getElementById("nav-item-count");
     const employeeName = document.getElementById("nav-employee-name");

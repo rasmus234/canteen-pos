@@ -12,7 +12,7 @@ export interface Employee {
     employeeCakes?: EmployeeCake[] | undefined;
     employeeLunches?: EmployeeLunch[] | undefined;
     orders?: Order[] | undefined;
-    items?: Item[] | undefined;
+    items?: number[] | undefined;
     token?: string | undefined;
 }
 

@@ -1,6 +1,6 @@
 
 import {currentEmployee} from "./index";
-import {Employee, Item} from "./models";
+import {Employee, Item, LunchMenu} from "./models";
 
 const baseUrl = "https://canteenapi.herokuapp.com/api/"
 const baseUrlLocal = "https://localhost:7117/api/"
@@ -72,6 +72,19 @@ export async function postOrder(menuItems: Item[]) {
             "Authorization": "Bearer " + currentEmployee.token
         },
         body: JSON.stringify({items: itemIds})
+    }).then(value => response = value.json());
+    return response;
+}
+
+export async function getCurrentMenu(): Promise<LunchMenu> {
+
+    let response;
+    await fetch(baseUrl+"LunchMenus", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + currentEmployee.token
+        }
     }).then(value => response = value.json());
     return response;
 }
