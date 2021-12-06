@@ -102,9 +102,9 @@ function itemChosenEffect(element: HTMLElement, x,y) {
 
 export function filterButtonsByCategory(category: string) {
     let buttons:HTMLButtonElement[] = document.getElementsByClassName('menu-item') as unknown as HTMLButtonElement[];
-    let test:HTMLButtonElement[] = document.getElementsByClassName('lunch-item') as unknown as HTMLButtonElement[];
+    let lunchButtons:HTMLButtonElement[] = document.getElementsByClassName('lunch-item') as unknown as HTMLButtonElement[];
 
-    buttons = [...buttons, ...test];
+    buttons = [...buttons, ...lunchButtons];
 
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].getAttribute("data-category").toLowerCase() == category.toLowerCase()) {
