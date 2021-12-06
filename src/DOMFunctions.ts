@@ -36,7 +36,9 @@ export function createMenuItem(menuItem: Item) {
     const menuItems = document.getElementById('menu-items-div') as HTMLDivElement;
     buttonElement.append(imageElement);
     buttonElement.append(spanElement);
+    
     menuItems.append(buttonElement);
+   
     return buttonElement;
 }
 function updateCounter(){
@@ -57,6 +59,7 @@ function itemChosenEffect(element: HTMLElement, x,y) {
     
     
     document.body.append(elemClone);
+    elemClone.style.position = "absolute";
     elemClone.style.zIndex = "9999";
     //Get target coordinates and size
     let xT = document.getElementById('shopping-cart').offsetLeft;
@@ -79,6 +82,7 @@ function itemChosenEffect(element: HTMLElement, x,y) {
         i++;
         if (i < 3){return;}
         elemClone.remove();
+        
         
         $( "#shopping-cart" ).toggle(150, function() {
             // Animation complete.
