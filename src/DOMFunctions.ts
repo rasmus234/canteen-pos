@@ -13,7 +13,12 @@ export function createMenuItem(menuItem: Item) {
     imageElement.src = blobPrefix + menuItem.image;
     spanElement.textContent = menuItem.name;
 
-    buttonElement.className = "btn btn-primary btn-lg menu-item";
+    if (menuItem.category.name.toLowerCase() === "lunches") {
+        buttonElement.className = "btn btn-primary btn-lg lunch-item";
+    } else {
+        buttonElement.className = "btn btn-primary btn-lg menu-item";
+    }
+    
     buttonElement.type = "button";
 
     buttonElement.setAttribute("data-category", menuItem.category.name);
@@ -108,6 +113,8 @@ export function filterButtonsByCategory(category: string) {
         return;
     }
 
+    
+
 
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].getAttribute("data-category").toLowerCase() == category.toLowerCase()) {
@@ -116,6 +123,7 @@ export function filterButtonsByCategory(category: string) {
             buttons[i].style.display = "none";
         }
     }
+    
 }
 
 function createShoppingCartItem(buttonElement: HTMLButtonElement) {
