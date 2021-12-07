@@ -72,4 +72,32 @@
 
 
 
+.lunch-card{
+    width: 100%;
+}
+
+.lunch-card:active{
+     background-color: red;
+ }
+
+
+.lunch-card > *{
+    display: inline-block;
+}
+.lunch-card-img-top{
+    height: 100%;
+    width: 100%;
+}
+
+.lunch-card-weekday{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.lunch-card-title{
+    font-weight: bold;
+}
+
+
+
 
