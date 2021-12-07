@@ -15,6 +15,11 @@ export function createMenuItem(menuItem: Item) {
 
     if (menuItem.category.name.toLowerCase() === "lunches") {
         buttonElement.className = "btn btn-primary btn-lg lunch-item";
+        
+        
+        
+        
+        
     } else {
         buttonElement.className = "btn btn-primary btn-lg menu-item";
     }
