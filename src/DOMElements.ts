@@ -7,12 +7,11 @@ export const beveragesButton = document.getElementById("beverages-button");
 export const fruitButton = document.getElementById("fruit-button");
 export const cakeButton = document.getElementById("cake-button");
 export const favouritesButton = document.getElementById("favourite-button");
-export const lunchButton = document.getElementById("lunches-button");
 export const logoutButton = document.getElementById("logout-button");
 export const checkoutButton = document.getElementById("checkout-button");
 export const shoppingCart = document.getElementById("shopping-cart-body");
 
-const categoryButtons = [breakfastButton, beveragesButton, fruitButton, cakeButton, favouritesButton, lunchButton];
+const categoryButtons = [breakfastButton, beveragesButton, fruitButton, cakeButton, favouritesButton];
 categoryButtons.forEach(button => button.addEventListener("click", () => {
     filterButtonsByCategory(button. id.split("-")[0]);
 }));

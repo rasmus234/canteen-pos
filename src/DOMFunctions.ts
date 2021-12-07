@@ -13,16 +13,7 @@ export function createMenuItem(menuItem: Item) {
     imageElement.src = blobPrefix + menuItem.image;
     spanElement.textContent = menuItem.name;
 
-    if (menuItem.category.name.toLowerCase() === "lunches") {
-        buttonElement.className = "btn btn-primary btn-lg lunch-item";
-        
-        
-        
-        
-        
-    } else {
-        buttonElement.className = "btn btn-primary btn-lg menu-item";
-    }
+    buttonElement.className = "btn btn-primary btn-lg menu-item";
     
     buttonElement.type = "button";
 
@@ -107,9 +98,7 @@ function itemChosenEffect(element: HTMLElement, x,y) {
 
 export function filterButtonsByCategory(category: string) {
     let buttons:HTMLButtonElement[] = document.getElementsByClassName('menu-item') as unknown as HTMLButtonElement[];
-    let lunchButtons:HTMLButtonElement[] = document.getElementsByClassName('lunch-item') as unknown as HTMLButtonElement[];
-
-    buttons = [...buttons, ...lunchButtons];
+    
 
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].getAttribute("data-category").toLowerCase() == category.toLowerCase()) {
