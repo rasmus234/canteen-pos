@@ -74,10 +74,11 @@
 
 .lunch-card{
     width: 100%;
+    background-color: white;
 }
 
 .lunch-card:active{
-     background-color: red;
+     background-color: white;
  }
 
 
