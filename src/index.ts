@@ -1,6 +1,6 @@
 
-import {createMenuItem, filterButtonsByCategory, getTotalItems, getTotalPrice, refreshNavBar} from "./DOMFunctions";
-import {getCurrentMenu, getMenuItems, loginWithPassword} from "./api";
+import {createMenuItem, filterButtonsByCategory, getTotalItems, getTotalPrice, initSelectedLunchItems, refreshNavBar} from "./DOMFunctions";
+import {getCurrentMenu, getEmployeeLunch, getMenuItems, loginWithPassword} from "./api";
 import "bootstrap";
 import "./css/custom.sass";
 import "./css/styles.css";
@@ -12,23 +12,28 @@ export let currentMenu: LunchMenu
 let menuItems: Item[] = [];
 let password = prompt("Enter password");
 
-loginWithPassword(password).then(employee => {
 
-    if(employee){
+init(password);
+
+async function init(password:string) :Promise<void>{
+    const employee = await loginWithPassword(password);
+    if (employee){
         currentEmployee = employee;
-        console.log("current employee",employee);
-        initMenuItems().then(() => {
-            refreshNavBar();
-        });
-        getCurrentMenu().then(menu => {
-            console.log(menu)
-        });
     }
     else {
         alert("Wrong password");
         document.location.reload();
     }
-});
+
+    await initMenuItems;
+    const currentMenuCall = await getCurrentMenu();
+    currentMenu = currentMenuCall;
+
+    const currentEmployeeLunch = await getEmployeeLunch()
+    initSelectedLunchItems(currentEmployeeLunch);
+
+    refreshNavBar();
+}
 
 async function initMenuItems(): Promise<void> {
     getMenuItems().then(data => {

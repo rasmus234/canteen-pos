@@ -1,5 +1,5 @@
 import {shoppingCart} from "./DOMElements";
-import {Item, OrderItem,Employee} from "./models";
+import {Item, OrderItem,Employee, EmployeeLunch} from "./models";
 import {currentEmployee} from "./index";
 import * as $ from "jquery";
 const blobPrefix = "data:image/png;base64,"
@@ -205,4 +205,19 @@ export function getSelectedLunchItems(): boolean[] {
         }
     }
     return selectedLunchItems;
+}
+
+export function initSelectedLunchItems(employeeLunch:EmployeeLunch):void {
+
+    const lunchItems: HTMLButtonElement[] = document.getElementsByClassName('lunch-card') as unknown as HTMLButtonElement[];
+
+    const employeeLunchDaysSelected = [employeeLunch.monday, employeeLunch.tuesday, employeeLunch.wednesday, employeeLunch.thursday, employeeLunch.friday];
+
+    for (let i = 0; i < lunchItems.length; i++) {
+        if (employeeLunchDaysSelected[i]){
+            lunchItems[i].classList.add("lunch-active");
+        }
+    }
+
+
 }

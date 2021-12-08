@@ -101,3 +101,15 @@ export async function setEmployeeLunch(employeeLunch:EmployeeLunch): Promise<voi
         body: JSON.stringify(employeeLunch)
     }).then(value => value.json()).then(value => console.log(value));
 }
+
+export async function getEmployeeLunch(): Promise<EmployeeLunch> {
+    let response;
+    await fetch(baseUrl+"LunchMenus/employeeLunch/" + currentEmployee.employeeId + "/" + 2, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + currentEmployee.token
+        }
+    }).then(value => response = value.json());
+    return response;
+}
