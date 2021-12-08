@@ -48,6 +48,12 @@ function updateCounter(){
     //Nothing here :)
 }
 
+$(".lunch-card").click(function () {
+    $(this).toggleClass('lunch-active');
+});
+
+
+
 function itemChosenEffect(element: HTMLElement, x,y) {
     //Make a copy of the element
     let elemClone = element.cloneNode(false) as HTMLElement;
