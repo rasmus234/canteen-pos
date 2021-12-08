@@ -6,17 +6,28 @@ const blobPrefix = "data:image/png;base64,"
 
 
 export function createMenuItem(menuItem: Item) {
+   
+    let favouriteIcon: HTMLImageElement= document.createElement("img");
     let buttonElement: HTMLButtonElement = document.createElement("button");
     let spanElement: HTMLSpanElement = document.createElement("span");
     let imageElement: HTMLImageElement = document.createElement("img");
-
+    
+    
+    favouriteIcon.className = "not-favourite";
+    
+    
+    
+    
+    
+    //Setup image
     imageElement.src = blobPrefix + menuItem.image;
+    
+    //Setup span text
     spanElement.textContent = menuItem.name;
 
+    //Setup button
     buttonElement.className = "btn btn-primary btn-lg menu-item";
-    
     buttonElement.type = "button";
-
     buttonElement.setAttribute("data-category", menuItem.category.name);
     buttonElement.setAttribute("data-price", String(menuItem.price));
     buttonElement.setAttribute("data-item-id", String(menuItem.itemId));
@@ -39,7 +50,7 @@ export function createMenuItem(menuItem: Item) {
     const menuItems = document.getElementById('menu-items-div') as HTMLDivElement;
     buttonElement.append(imageElement);
     buttonElement.append(spanElement);
-    
+    buttonElement.append(favouriteIcon);
     menuItems.append(buttonElement);
    
     return buttonElement;
