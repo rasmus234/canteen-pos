@@ -111,3 +111,25 @@ export async function getEmployeeLunch(): Promise<EmployeeLunch> {
     }).then(value => response = value.json());
     return response;
 }
+
+export async function addFavouriteItem(itemId:number): Promise<void>
+{
+    await fetch(baseUrl+"favourites/" + itemId, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + currentEmployee.token
+        }
+    }).then(value => value.json()).then(value => console.log(value));
+}
+
+export async function removeFavouriteItem(itemId:number): Promise<void>
+{
+    await fetch(baseUrl+"favourites/" + itemId, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + currentEmployee.token
+        }
+    }).then(value => value.json()).then(value => console.log(value));
+}
