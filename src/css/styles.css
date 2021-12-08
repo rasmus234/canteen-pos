@@ -77,9 +77,6 @@
     background-color: grey;
 }
 
-.lunch-card:hover{
- }
-
 
 .lunch-card > *{
     display: inline-block;
