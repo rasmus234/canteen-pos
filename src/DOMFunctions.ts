@@ -48,9 +48,10 @@ export function createMenuItem(menuItem: Item) {
     })
 
     const menuItems = document.getElementById('menu-items-div') as HTMLDivElement;
+    buttonElement.append(favouriteIcon);
     buttonElement.append(imageElement);
     buttonElement.append(spanElement);
-    buttonElement.append(favouriteIcon);
+    
     menuItems.append(buttonElement);
    
     return buttonElement;

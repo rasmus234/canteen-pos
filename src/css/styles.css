@@ -47,6 +47,7 @@
 
 
 .menu-item {
+    
     margin-bottom: 12px;
     margin-right: 1%;
     width: 25vw;
@@ -105,7 +106,8 @@
 }
 .not-favourite, .favourite{
     width: 5%;
-    
+    display: block;
+    z-index: 99999;
 }
 
 .not-favourite{
