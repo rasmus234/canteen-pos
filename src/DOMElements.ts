@@ -1,13 +1,13 @@
 import {filterButtonsByCategory, getSelectedLunchItems, getShoppingCartItems} from "./DOMFunctions";
 import {postOrder, setEmployeeLunch} from "./api";
-import { EmployeeLunch } from "./models";
-import { currentEmployee } from "./index";
+import {EmployeeLunch} from "./models";
+import {currentEmployee} from "./index";
 
 
 export const breakfastButton = document.getElementById("breakfast-button");
 export const beveragesButton = document.getElementById("beverages-button");
 export const fruitButton = document.getElementById("fruit-button");
-export const cakeButton = document.getElementById("cake-button");
+export const cakeButton = document.getElementById("cakes-button");
 export const favouritesButton = document.getElementById("favourite-button");
 export const logoutButton = document.getElementById("logout-button");
 export const checkoutButton = document.getElementById("checkout-button");
@@ -16,7 +16,7 @@ export const confirmLunchButton = document.getElementById("confirm-lunch-button"
 
 const categoryButtons = [breakfastButton, beveragesButton, fruitButton, cakeButton, favouritesButton];
 categoryButtons.forEach(button => button.addEventListener("click", () => {
-    filterButtonsByCategory(button. id.split("-")[0]);
+    filterButtonsByCategory(button.id.split("-")[0]);
 }));
 
 confirmLunchButton.addEventListener("click", () => {
