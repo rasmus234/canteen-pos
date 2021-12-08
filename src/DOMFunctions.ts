@@ -11,14 +11,17 @@ export function createMenuItem(menuItem: Item) {
     let buttonElement: HTMLButtonElement = document.createElement("button");
     let spanElement: HTMLSpanElement = document.createElement("span");
     let imageElement: HTMLImageElement = document.createElement("img");
-    
-    
-    favouriteIcon.className = "not-favourite";
-    
-    
-    
-    
-    
+
+    imageElement.addEventListener("click", () => {
+        console.log("Hi bauidsbaisdoasd")
+        const isFavourite = imageElement.classList.contains("favourite");
+        if (isFavourite) {
+            imageElement.classList.replace("favourite", "not-favourite");
+        } else {
+            imageElement.classList.replace("not-favourite", "favourite");
+        }
+    });
+
     //Setup image
     imageElement.src = blobPrefix + menuItem.image;
     
@@ -35,9 +38,11 @@ export function createMenuItem(menuItem: Item) {
     const favouriteItemIds = (currentEmployee as Employee).items
     if (favouriteItemIds.includes(menuItem.itemId)) {
         buttonElement.setAttribute("data-favourite","true")
+        favouriteIcon.className = "favourite";
     }
     else {
         buttonElement.setAttribute("data-favourite","false")
+        favouriteIcon.className = "not-favourite";
     }
 
 
