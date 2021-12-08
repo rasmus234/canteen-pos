@@ -2,10 +2,10 @@
 import {currentEmployee} from "./index";
 import {Employee, EmployeeLunch, Item, LunchMenu} from "./models";
 
-const baseUrlRemote = "https://canteenapi.herokuapp.com/api/"
+const baseUrlRemote = "https://canteenapi.herokuapp.com/"
 const baseUrlLocal = "https://localhost:7106/"
 
-const baseUrl = baseUrlLocal;
+const baseUrl = baseUrlRemote;
 
 
 export async function loginWithPassword(password: string): Promise<Employee> {
