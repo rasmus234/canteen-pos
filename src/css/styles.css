@@ -1,3 +1,4 @@
+
 .menu-item {
     margin-bottom: 12px;
     margin-right: 1%;
@@ -18,7 +19,7 @@
 
 
 .filter {
-    height: 15vw;
+    height: 15vh;
     width: 15vw;
     margin: 0 0 10px 0;
 }
@@ -44,11 +45,12 @@
 
     margin-left: 10%;
     margin-right: 10%;
-    font-size: 2rem
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 #navcol-1 {
-    height: 150px;
+    height: 10vh;
 }
 
 
