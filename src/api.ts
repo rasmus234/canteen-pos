@@ -1,11 +1,11 @@
 
-import {currentEmployee} from "./index";
+import {currentEmployee, currentMenu} from "./index";
 import {Employee, EmployeeLunch, Item, LunchMenu} from "./models";
 
 const baseUrlRemote = "https://canteenapi.herokuapp.com/"
 const baseUrlLocal = "https://localhost:7106/"
 
-const baseUrl = baseUrlRemote;
+const baseUrl = baseUrlLocal;
 
 
 export async function loginWithPassword(password: string): Promise<Employee> {
@@ -47,7 +47,6 @@ export async function getEmployeeFromToken(token: string): Promise<Employee> {
 }
 
 export async function getMenuItems(): Promise<Item[]> {
-    console.log("getting menu items");
     let items: Item[] = [];
     await fetch(baseUrl+"items", {
         method: "GET",
@@ -57,8 +56,9 @@ export async function getMenuItems(): Promise<Item[]> {
         },
     })
         .then(data => data.json())
-        .then(data => data.map((data: Item) =>
-            items.push(data)))
+        .then(data => items = data);
+
+    console.log("items",items);
 
     return items;
 }
@@ -104,7 +104,7 @@ export async function setEmployeeLunch(employeeLunch:EmployeeLunch): Promise<voi
 
 export async function getEmployeeLunch(): Promise<EmployeeLunch> {
     let response;
-    await fetch(baseUrl+"LunchMenus/employeeLunch/" + currentEmployee.employeeId + "/" + 2, {
+    await fetch(baseUrl+"LunchMenus/employeeLunch/" + currentEmployee.employeeId + "/" + currentMenu.lunchMenuId, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

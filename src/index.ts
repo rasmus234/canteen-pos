@@ -15,6 +15,8 @@ let password = prompt("Enter password");
 
 init(password);
 
+
+
 async function init(password:string) :Promise<void>{
     const employee = await loginWithPassword(password);
     if (employee){
@@ -24,8 +26,7 @@ async function init(password:string) :Promise<void>{
         alert("Wrong password");
         document.location.reload();
     }
-
-    await initMenuItems;
+    await initMenuItems();
     const currentMenuCall = await getCurrentMenu();
     currentMenu = currentMenuCall;
 
@@ -37,6 +38,7 @@ async function init(password:string) :Promise<void>{
 
 async function initMenuItems(): Promise<void> {
     getMenuItems().then(data => {
+        console.log(data);
         menuItems = data;
         data.forEach(menuItem => {
             createMenuItem(menuItem);
