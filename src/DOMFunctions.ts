@@ -21,7 +21,6 @@ export function createMenuItem(menuItem: Item) {
             imageElement.classList.replace("not-favourite", "favourite");
         }
     });
-
     //Setup image
     imageElement.src = blobPrefix + menuItem.image;
     
