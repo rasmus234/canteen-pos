@@ -38,7 +38,6 @@ async function init(password:string) :Promise<void>{
 
 async function initMenuItems(): Promise<void> {
     getMenuItems().then(data => {
-        console.log(data);
         menuItems = data;
         data.forEach(menuItem => {
             createMenuItem(menuItem);
