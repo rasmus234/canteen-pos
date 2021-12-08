@@ -1,5 +1,7 @@
-import {filterButtonsByCategory, getShoppingCartItems} from "./DOMFunctions";
-import {postOrder} from "./api";
+import {filterButtonsByCategory, getSelectedLunchItems, getShoppingCartItems} from "./DOMFunctions";
+import {postOrder, setEmployeeLunch} from "./api";
+import { EmployeeLunch } from "./models";
+import { currentEmployee } from "./index";
 
 
 export const breakfastButton = document.getElementById("breakfast-button");
@@ -10,11 +12,26 @@ export const favouritesButton = document.getElementById("favourite-button");
 export const logoutButton = document.getElementById("logout-button");
 export const checkoutButton = document.getElementById("checkout-button");
 export const shoppingCart = document.getElementById("shopping-cart-body");
+export const confirmLunchButton = document.getElementById("confirm-lunch-button");
 
 const categoryButtons = [breakfastButton, beveragesButton, fruitButton, cakeButton, favouritesButton];
 categoryButtons.forEach(button => button.addEventListener("click", () => {
     filterButtonsByCategory(button. id.split("-")[0]);
 }));
+
+confirmLunchButton.addEventListener("click", () => {
+    const lunchItems = getSelectedLunchItems();
+    const employeeLunch: EmployeeLunch = {
+        employeeId: currentEmployee.employeeId,
+        lunchMenuId: 2,
+        monday: lunchItems[0],
+        tuesday: lunchItems[1],
+        wednesday: lunchItems[2],
+        thursday: lunchItems[3],
+        friday: lunchItems[4],
+    };
+    setEmployeeLunch(employeeLunch);
+});
 
 checkoutButton.addEventListener("click", () => {
     console.log("Checkout clicked");

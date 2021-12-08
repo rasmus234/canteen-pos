@@ -1,9 +1,11 @@
 
 import {currentEmployee} from "./index";
-import {Employee, Item, LunchMenu} from "./models";
+import {Employee, EmployeeLunch, Item, LunchMenu} from "./models";
 
-const baseUrl = "https://canteenapi.herokuapp.com/api/"
-const baseUrlLocal = "https://localhost:7117/api/"
+const baseUrlRemote = "https://canteenapi.herokuapp.com/api/"
+const baseUrlLocal = "https://localhost:7106/"
+
+const baseUrl = baseUrlLocal;
 
 
 export async function loginWithPassword(password: string): Promise<Employee> {
@@ -87,4 +89,15 @@ export async function getCurrentMenu(): Promise<LunchMenu> {
         }
     }).then(value => response = value.json());
     return response;
+}
+
+export async function setEmployeeLunch(employeeLunch:EmployeeLunch): Promise<void> {
+    await fetch(baseUrl+"LunchMenus/employeeLunch", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + currentEmployee.token
+        },
+        body: JSON.stringify(employeeLunch)
+    }).then(value => value.json()).then(value => console.log(value));
 }

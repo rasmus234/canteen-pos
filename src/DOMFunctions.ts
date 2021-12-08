@@ -190,3 +190,19 @@ export function refreshNavBar(): void {
 
 }
 
+export function getSelectedLunchItems(): boolean[] {
+
+    const lunchItems: HTMLButtonElement[] = document.getElementsByClassName('lunch-card') as unknown as HTMLButtonElement[];
+
+    console.log(lunchItems);
+    let selectedLunchItems: boolean[] = [];
+
+    for (let i = 0; i < lunchItems.length; i++) {
+        if (lunchItems[i].classList.contains("lunch-active")) {
+            selectedLunchItems.push(true);
+        } else {
+            selectedLunchItems.push(false);
+        }
+    }
+    return selectedLunchItems;
+}
