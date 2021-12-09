@@ -2,6 +2,7 @@ import {shoppingCart} from "./DOMElements";
 import {Item, OrderItem,Employee, EmployeeLunch} from "./models";
 import {currentEmployee} from "./index";
 import * as $ from "jquery";
+import { addFavouriteItem, removeFavouriteItem } from "./api";
 const blobPrefix = "data:image/png;base64,"
 
 
@@ -12,14 +13,17 @@ export function createMenuItem(menuItem: Item) {
     let spanElement: HTMLSpanElement = document.createElement("span");
     let imageElement: HTMLImageElement = document.createElement("img");
 
-    imageElement.addEventListener("click", () => {
+    favouriteIcon.addEventListener("click", () => {
         event.stopPropagation();
         console.log("Hi bauidsbaisdoasd")
-        const isFavourite = imageElement.classList.contains("favourite");
+        const isFavourite = favouriteIcon.classList.contains("favourite");
+        console.log(isFavourite);
         if (isFavourite) {
-            imageElement.classList.replace("favourite", "not-favourite");
+            favouriteIcon.classList.replace("favourite", "not-favourite");
+            removeFavouriteItem(menuItem.itemId);
         } else {
-            imageElement.classList.replace("not-favourite", "favourite");
+            favouriteIcon.classList.replace("not-favourite", "favourite");
+            addFavouriteItem(menuItem.itemId);
         }
     });
     //Setup image

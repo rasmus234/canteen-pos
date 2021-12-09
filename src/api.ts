@@ -1,17 +1,16 @@
-
 import {currentEmployee, currentMenu} from "./index";
 import {Employee, EmployeeLunch, Item, LunchMenu} from "./models";
 
 const baseUrlRemote = "https://canteenapi.herokuapp.com/"
 const baseUrlLocal = "https://localhost:7106/"
 
-const baseUrl = baseUrlRemote;
+const baseUrl = baseUrlLocal;
 
 
 export async function loginWithPassword(password: string): Promise<Employee> {
     console.log("logging in with password");
     console.log("ye")
-    let tokenResponse = await fetch(baseUrl+"login", {
+    let tokenResponse = await fetch(baseUrl + "login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -48,7 +47,7 @@ export async function getEmployeeFromToken(token: string): Promise<Employee> {
 
 export async function getMenuItems(): Promise<Item[]> {
     let items: Item[] = [];
-    await fetch(baseUrl+"items", {
+    await fetch(baseUrl + "items", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -65,7 +64,7 @@ export async function postOrder(menuItems: Item[]) {
 
     const itemIds = menuItems.map(item => item.itemId);
     let response;
-    await fetch(baseUrl+"Orders", {
+    await fetch(baseUrl + "Orders", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -79,7 +78,7 @@ export async function postOrder(menuItems: Item[]) {
 export async function getCurrentMenu(): Promise<LunchMenu> {
 
     let response;
-    await fetch(baseUrl+"LunchMenus/current", {
+    await fetch(baseUrl + "LunchMenus/current", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -89,8 +88,8 @@ export async function getCurrentMenu(): Promise<LunchMenu> {
     return response;
 }
 
-export async function setEmployeeLunch(employeeLunch:EmployeeLunch): Promise<void> {
-    await fetch(baseUrl+"LunchMenus/employeeLunch", {
+export async function setEmployeeLunch(employeeLunch: EmployeeLunch): Promise<void> {
+    await fetch(baseUrl + "LunchMenus/employeeLunch", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -102,7 +101,7 @@ export async function setEmployeeLunch(employeeLunch:EmployeeLunch): Promise<voi
 
 export async function getEmployeeLunch(): Promise<EmployeeLunch> {
     let response;
-    await fetch(baseUrl+"LunchMenus/employeeLunch/" + currentEmployee.employeeId + "/" + currentMenu.lunchMenuId, {
+    await fetch(baseUrl + "LunchMenus/employeeLunch/" + currentEmployee.employeeId + "/" + currentMenu.lunchMenuId, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -112,24 +111,22 @@ export async function getEmployeeLunch(): Promise<EmployeeLunch> {
     return response;
 }
 
-export async function addFavouriteItem(itemId:number): Promise<void>
-{
-    await fetch(baseUrl+"favourites/" + itemId, {
+export async function addFavouriteItem(itemId: number): Promise<void> {
+    await fetch(baseUrl + "employees/" + "favourites" + "?itemId=" + itemId, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + currentEmployee.token
         }
-    }).then(value => value.json()).then(value => console.log(value));
+    }).then(value => console.log(value));
 }
 
-export async function removeFavouriteItem(itemId:number): Promise<void>
-{
-    await fetch(baseUrl+"favourites/" + itemId, {
+export async function removeFavouriteItem(itemId: number): Promise<void> {
+    await fetch(baseUrl + "employees/" + "favourites" + "?itemId=" + itemId, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + currentEmployee.token
         }
-    }).then(value => value.json()).then(value => console.log(value));
+    }).then(value => console.log(value));
 }
