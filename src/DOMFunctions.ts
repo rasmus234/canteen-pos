@@ -1,4 +1,4 @@
-import {shoppingCart} from "./DOMElements";
+import {favouritesButton, shoppingCart} from "./DOMElements";
 import {Item, OrderItem,Employee, EmployeeLunch} from "./models";
 import {currentEmployee} from "./index";
 import * as $ from "jquery";
@@ -27,6 +27,7 @@ export function createMenuItem(menuItem: Item) {
     //Setup image
     imageElement.src = blobPrefix + menuItem.image;
     
+   
     //Setup span text
     spanElement.textContent = menuItem.name;
 
@@ -75,7 +76,9 @@ $(".lunch-card").click(function () {
 
 function itemChosenEffect(element: HTMLElement, x,y) {
     //Make a copy of the element
-    let elemClone = element.cloneNode(false) as HTMLElement;
+    let elemClone = element.cloneNode(true) as HTMLElement;
+    elemClone.removeChild(elemClone.firstChild);
+    elemClone.removeChild(elemClone.lastChild);
     element.append(elemClone);
     
     elemClone.style.width = element.offsetWidth + "px";
