@@ -13,6 +13,7 @@ export function createMenuItem(menuItem: Item) {
     let imageElement: HTMLImageElement = document.createElement("img");
 
     imageElement.addEventListener("click", () => {
+        event.stopPropagation();
         console.log("Hi bauidsbaisdoasd")
         const isFavourite = imageElement.classList.contains("favourite");
         if (isFavourite) {
