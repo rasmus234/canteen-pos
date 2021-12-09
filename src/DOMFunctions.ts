@@ -53,7 +53,7 @@ export function createMenuItem(menuItem: Item) {
     buttonElement.addEventListener("click", (ev) => {
         createShoppingCartItem(buttonElement);
         itemChosenEffect(buttonElement, buttonElement.offsetLeft, buttonElement.offsetTop);
-        updateCounter();
+        
     });
 
     const menuItems = document.getElementById('menu-items-div') as HTMLDivElement;
@@ -116,11 +116,22 @@ function itemChosenEffect(element: HTMLElement, x, y) {
             return;
         }
         elemClone.remove();
+        updateCounter();
 
-
-        $("#shopping-cart").toggle(150, function () {
-            // Animation complete.
+        
+        
+        
+        
+        $("#shopping-cart").animate({
+            height: "25px"
+        }, 75, "linear", function () {
+            
+            $("#shopping-cart").animate({
+                height: "50px"
+            }, 75, "linear", function(){
+            });
         });
+    
 
 
     });

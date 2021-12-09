@@ -25,7 +25,7 @@
                     </div>
                         <div >
                             <span id="nav-employee-name" style="margin-right: 40px">User:</span>
-                            <div class="row">
+                            <div class="row" id="nav-bar-buttons-row">
                                 <button id="logout-button" class="btn btn-warning" type="button" data-bs-toggle="offcanvas"
                                         style="margin-right: 10px;height:50px;width: 100px;">
                                     <span style="height:80%;">Log out</span>
@@ -38,13 +38,16 @@
                                     <span style="height:80%;">Lunches</span>
 
                                 </button>
-
-                                <button class="btn btn-primary" id="shopping-cart" type="button" data-bs-toggle="offcanvas"
-                                        data-bs-target="#offcanvas-1">
-
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="shopping-cart-count">0</span>
-                                    <img src="img/cart.png" style="height:80%;">
-                                </button>
+                                
+                                
+                                    
+                                    <button class="btn btn-primary" id="shopping-cart" type="button" data-bs-toggle="offcanvas"
+                                            data-bs-target="#offcanvas-1">
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="shopping-cart-count">0</span>
+                                        <img src="img/cart.png" style="height:80%;">
+                                    </button>
+                               
+                                
                             </div>
 
                         </div>
@@ -93,7 +96,7 @@
                 <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" id="offcanvas-lunches">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title">Lunch menu</h5>
-                        <button id="confirm-lunch-button" type="button" class="btn btn-success"> Confirm</button>
+                        <button id="confirm-lunch-button" type="button" class="btn btn-success" data-bs-dismiss="offcanvas"> Confirm</button>
                         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                     </div>
