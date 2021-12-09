@@ -12,8 +12,8 @@ import "./css/custom.sass";
 import "./css/styles.css";
 import {Employee, Item, LunchMenu} from "./models";
 
-export let currentEmployee: Employee
-export let currentMenu: LunchMenu
+export let currentEmployee: Employee;
+export let currentMenu: LunchMenu;
 
 export let menuItems: Item[] = [];
 let password = prompt("Enter password");
@@ -35,7 +35,7 @@ async function init(password: string): Promise<void> {
     const currentMenuCall = await getCurrentMenu();
     currentMenu = currentMenuCall;
 
-    const currentEmployeeLunch = await getEmployeeLunch()
+    const currentEmployeeLunch = await getEmployeeLunch();
     initSelectedLunchItems(currentEmployeeLunch);
 
     refreshNavBar();
