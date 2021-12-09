@@ -15,9 +15,7 @@ export function createMenuItem(menuItem: Item) {
 
     favouriteIcon.addEventListener("click", () => {
         event.stopPropagation();
-        console.log("Hi bauidsbaisdoasd")
         const isFavourite = favouriteIcon.classList.contains("favourite");
-        console.log(isFavourite);
         if (isFavourite) {
             favouriteIcon.classList.replace("favourite", "not-favourite");
             removeFavouriteItem(menuItem.itemId);

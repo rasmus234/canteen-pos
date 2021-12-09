@@ -118,7 +118,7 @@ export async function addFavouriteItem(itemId: number): Promise<void> {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + currentEmployee.token
         }
-    }).then(value => console.log(value));
+    }).catch(error => console.log(error));
 }
 
 export async function removeFavouriteItem(itemId: number): Promise<void> {
@@ -128,5 +128,5 @@ export async function removeFavouriteItem(itemId: number): Promise<void> {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + currentEmployee.token
         }
-    }).then(value => console.log(value));
+    }).catch(error => console.log(error));
 }
