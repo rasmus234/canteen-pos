@@ -88,7 +88,8 @@ export async function getCurrentMenu(): Promise<LunchMenu> {
     return response;
 }
 
-export async function setEmployeeLunch(employeeLunch: EmployeeLunch): Promise<void> {
+export async function setEmployeeLunch(employeeLunch: EmployeeLunch): Promise<boolean> {
+    let success;
     await fetch(baseUrl + "LunchMenus/employeeLunch", {
         method: "POST",
         headers: {
@@ -96,7 +97,8 @@ export async function setEmployeeLunch(employeeLunch: EmployeeLunch): Promise<vo
             "Authorization": "Bearer " + currentEmployee.token
         },
         body: JSON.stringify(employeeLunch)
-    }).then(value => value.json()).then(value => console.log(value));
+    }).then(value => success = value.ok);
+    return success;
 }
 
 export async function getEmployeeLunch(): Promise<EmployeeLunch> {
