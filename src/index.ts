@@ -1,5 +1,11 @@
-
-import {createMenuItem, filterButtonsByCategory, getTotalItems, getTotalPrice, initSelectedLunchItems, refreshNavBar} from "./DOMFunctions";
+import {
+    createMenuItem,
+    filterButtonsByCategory,
+    getTotalItems,
+    getTotalPrice,
+    initSelectedLunchItems,
+    refreshNavBar
+} from "./DOMFunctions";
 import {getCurrentMenu, getEmployeeLunch, getMenuItems, loginWithPassword} from "./api";
 import "bootstrap";
 import "./css/custom.sass";
@@ -9,24 +15,23 @@ import {Employee, Item, LunchMenu} from "./models";
 export let currentEmployee: Employee
 export let currentMenu: LunchMenu
 
-let menuItems: Item[] = [];
+export let menuItems: Item[] = [];
 let password = prompt("Enter password");
 
 
 init(password);
 
 
-
-async function init(password:string) :Promise<void>{
+async function init(password: string): Promise<void> {
     const employee = await loginWithPassword(password);
-    if (employee){
+    if (employee) {
         currentEmployee = employee;
-    }
-    else {
+    } else {
         alert("Wrong password");
         document.location.reload();
     }
     await initMenuItems();
+    refreshNavBar();
     const currentMenuCall = await getCurrentMenu();
     currentMenu = currentMenuCall;
 
@@ -37,7 +42,7 @@ async function init(password:string) :Promise<void>{
 }
 
 async function initMenuItems(): Promise<void> {
-    getMenuItems().then(data => {
+    await getMenuItems().then(data => {
         menuItems = data;
         data.forEach(menuItem => {
             createMenuItem(menuItem);

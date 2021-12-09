@@ -1,14 +1,15 @@
 import {shoppingCart} from "./DOMElements";
-import {Item, OrderItem,Employee, EmployeeLunch} from "./models";
-import {currentEmployee} from "./index";
+import {Item, OrderItem, Employee, EmployeeLunch} from "./models";
+import {currentEmployee, currentMenu, menuItems} from "./index";
 import * as $ from "jquery";
-import { addFavouriteItem, removeFavouriteItem } from "./api";
+import {addFavouriteItem, removeFavouriteItem} from "./api";
+
 const blobPrefix = "data:image/png;base64,"
 
 
 export function createMenuItem(menuItem: Item) {
-   
-    let favouriteIcon: HTMLImageElement= document.createElement("img");
+
+    let favouriteIcon: HTMLImageElement = document.createElement("img");
     let buttonElement: HTMLButtonElement = document.createElement("button");
     let spanElement: HTMLSpanElement = document.createElement("span");
     let imageElement: HTMLImageElement = document.createElement("img");
@@ -26,7 +27,7 @@ export function createMenuItem(menuItem: Item) {
     });
     //Setup image
     imageElement.src = blobPrefix + menuItem.image;
-    
+
     //Setup span text
     spanElement.textContent = menuItem.name;
 
@@ -39,11 +40,10 @@ export function createMenuItem(menuItem: Item) {
 
     const favouriteItemIds = (currentEmployee as Employee).items
     if (favouriteItemIds.includes(menuItem.itemId)) {
-        buttonElement.setAttribute("data-favourite","true")
+        buttonElement.setAttribute("data-favourite", "true")
         favouriteIcon.className = "favourite";
-    }
-    else {
-        buttonElement.setAttribute("data-favourite","false")
+    } else {
+        buttonElement.setAttribute("data-favourite", "false")
         favouriteIcon.className = "not-favourite";
     }
 
@@ -58,12 +58,13 @@ export function createMenuItem(menuItem: Item) {
     buttonElement.append(favouriteIcon);
     buttonElement.append(imageElement);
     buttonElement.append(spanElement);
-    
+
     menuItems.append(buttonElement);
-   
+
     return buttonElement;
 }
-function updateCounter(){
+
+function updateCounter() {
     //Nothing here :)
 }
 
@@ -72,20 +73,19 @@ $(".lunch-card").click(function () {
 });
 
 
-
-function itemChosenEffect(element: HTMLElement, x,y) {
+function itemChosenEffect(element: HTMLElement, x, y) {
     //Make a copy of the element
     let elemClone = element.cloneNode(false) as HTMLElement;
     element.append(elemClone);
-    
+
     elemClone.style.width = element.offsetWidth + "px";
     elemClone.style.height = element.offsetHeight + "px";
-    
+
     //Set Initial position
     elemClone.style.left = x + "px";
     elemClone.style.top = y + "px";
-    
-    
+
+
     document.body.append(elemClone);
     elemClone.style.position = "absolute";
     elemClone.style.zIndex = "9999";
@@ -94,36 +94,37 @@ function itemChosenEffect(element: HTMLElement, x,y) {
     let yT = document.getElementById('shopping-cart').offsetTop;
     let wT = document.getElementById('shopping-cart').offsetWidth;
     let hT = document.getElementById('shopping-cart').offsetHeight;
-    
-   
-    
+
+
     //Set target coordinates and size, CSS will handle the animation
     elemClone.style.left = xT + 'px';
     elemClone.style.top = yT + 'px';
     elemClone.style.width = wT + 'px';
     elemClone.style.height = hT + 'px';
-    
+
 
     //On transition end, do a shopping cart animation
     let i = 0;
     elemClone.addEventListener('transitionend', () => {
         i++;
-        if (i < 3){return;}
+        if (i < 3) {
+            return;
+        }
         elemClone.remove();
-        
-        
-        $( "#shopping-cart" ).toggle(150, function() {
+
+
+        $("#shopping-cart").toggle(150, function () {
             // Animation complete.
-          });
-        
-        
+        });
+
+
     });
-    
+
 }
 
 export function filterButtonsByCategory(category: string) {
-    let buttons:HTMLButtonElement[] = document.getElementsByClassName('menu-item') as unknown as HTMLButtonElement[];
-    
+    let buttons: HTMLButtonElement[] = document.getElementsByClassName('menu-item') as unknown as HTMLButtonElement[];
+
 
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].getAttribute("data-category").toLowerCase() == category.toLowerCase()) {
@@ -132,7 +133,7 @@ export function filterButtonsByCategory(category: string) {
             buttons[i].style.display = "none";
         }
     }
-    if (category === "favourite"){
+    if (category === "favourite") {
         for (let i = 0; i < buttons.length; i++) {
             if (buttons[i].getAttribute("data-favourite") === "true") {
                 buttons[i].style.display = "block";
@@ -140,7 +141,7 @@ export function filterButtonsByCategory(category: string) {
         }
         return;
     }
-    
+
 }
 
 function createShoppingCartItem(buttonElement: HTMLButtonElement) {
@@ -226,17 +227,23 @@ export function getSelectedLunchItems(): boolean[] {
     return selectedLunchItems;
 }
 
-export function initSelectedLunchItems(employeeLunch:EmployeeLunch):void {
+export function initSelectedLunchItems(employeeLunch: EmployeeLunch): void {
 
-    const lunchItems: HTMLButtonElement[] = document.getElementsByClassName('lunch-card') as unknown as HTMLButtonElement[];
+    const lunchItems: HTMLDivElement[] = document.getElementsByClassName('lunch-card') as unknown as HTMLDivElement[];
+    const lunchItemsImages = document.getElementsByClassName('lunch-card-img-top') as unknown as HTMLImageElement[];
+    const lunchItemsNames = document.getElementsByClassName('lunch-card-text') as unknown as HTMLSpanElement[];
 
+    const lunchMenuItemIds = [currentMenu.mondayItemId, currentMenu.tuesdayItemId, currentMenu.wednesdayItemId, currentMenu.thursdayItemId, currentMenu.fridayItemId];
     const employeeLunchDaysSelected = [employeeLunch.monday, employeeLunch.tuesday, employeeLunch.wednesday, employeeLunch.thursday, employeeLunch.friday];
 
+    console.log(menuItems);
     for (let i = 0; i < lunchItems.length; i++) {
-        if (employeeLunchDaysSelected[i]){
+        const item = menuItems.find(x => x.itemId === lunchMenuItemIds[i]);
+        console.log(item);
+        lunchItemsImages[i].src = blobPrefix + item.image;
+        lunchItemsNames[i].textContent = item.name;
+        if (employeeLunchDaysSelected[i]) {
             lunchItems[i].classList.add("lunch-active");
         }
     }
-
-
 }
