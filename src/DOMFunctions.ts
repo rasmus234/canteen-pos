@@ -19,9 +19,11 @@ export function createMenuItem(menuItem: Item) {
         const isFavourite = favouriteIcon.classList.contains("favourite");
         if (isFavourite) {
             favouriteIcon.classList.replace("favourite", "not-favourite");
+            buttonElement.setAttribute("data-favourite", "false");
             removeFavouriteItem(menuItem.itemId);
         } else {
             favouriteIcon.classList.replace("not-favourite", "favourite");
+            buttonElement.setAttribute("data-favourite", "true");
             addFavouriteItem(menuItem.itemId);
         }
     });
@@ -140,6 +142,9 @@ export function filterButtonsByCategory(category: string) {
         for (let i = 0; i < buttons.length; i++) {
             if (buttons[i].getAttribute("data-favourite") === "true") {
                 buttons[i].style.display = "block";
+            }
+            else {
+                buttons[i].style.display = "none";
             }
         }
         return;
