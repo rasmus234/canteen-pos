@@ -47,7 +47,7 @@ export async function getEmployeeFromToken(token: string): Promise<Employee> {
 
 export async function getMenuItems(): Promise<Item[]> {
     let items: Item[] = [];
-    await fetch(baseUrl + "items", {
+    await fetch(baseUrl + "items/" + "true", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
