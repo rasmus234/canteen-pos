@@ -4,7 +4,7 @@ import {Employee, EmployeeLunch, Item, LunchMenu} from "./models";
 const baseUrlRemote = "https://canteenapi.herokuapp.com/";
 const baseUrlLocal = "https://localhost:7106/";
 
-const baseUrl = baseUrlRemote;
+const baseUrl = baseUrlLocal;
 
 
 export async function loginWithPassword(password: string): Promise<Employee> {
@@ -47,7 +47,7 @@ export async function getEmployeeFromToken(token: string): Promise<Employee> {
 
 export async function getMenuItems(): Promise<Item[]> {
     let items: Item[] = [];
-    await fetch(baseUrl + "items", {
+    await fetch(baseUrl + "items/" + "true", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
