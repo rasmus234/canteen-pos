@@ -3,6 +3,8 @@ import {postOrder, setEmployeeLunch} from "./api";
 import {EmployeeLunch} from "./models";
 import {currentEmployee} from "./index";
 
+import {}'bootstrap/dist/js/bootstrap.bundle'
+
 
 export const breakfastButton = document.getElementById("breakfast-button");
 export const beveragesButton = document.getElementById("beverages-button");
@@ -30,7 +32,14 @@ confirmLunchButton.addEventListener("click", () => {
         thursday: lunchItems[3],
         friday: lunchItems[4],
     };
-    setEmployeeLunch(employeeLunch);
+    let result = setEmployeeLunch(employeeLunch);
+    const offcanvas = new bootstrap.offcanvas
+    if (result){
+        document.getElementById("offcanvas-lunches").classList.remove("show");
+    }
+    else {
+        alert("Something went wrong");
+    }
 });
 
 checkoutButton.addEventListener("click", () => {
