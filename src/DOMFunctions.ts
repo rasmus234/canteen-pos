@@ -65,7 +65,8 @@ export function createMenuItem(menuItem: Item) {
 }
 
 function updateCounter() {
-    //Nothing here :)
+    let counter = document.getElementById('shopping-cart-count') as HTMLDivElement;
+    counter.textContent = String(shoppingCart.children.length);
 }
 
 $(".lunch-card").click(function () {
@@ -159,6 +160,7 @@ function createShoppingCartItem(buttonElement: HTMLButtonElement) {
     itemClone.addEventListener("click", (ev) => {
         itemClone.remove();
         refreshNavBar();
+        updateCounter();
     });
     refreshNavBar();
 }
