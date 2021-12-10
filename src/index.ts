@@ -30,6 +30,7 @@ async function init(password: string): Promise<void> {
         alert("Wrong password");
         document.location.reload();
     }
+    refreshNavBar();
     await initMenuItems();
     refreshNavBar();
     const currentMenuCall = await getCurrentMenu();

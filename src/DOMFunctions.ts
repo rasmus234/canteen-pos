@@ -2,7 +2,7 @@ import {favouritesButton, shoppingCart} from "./DOMElements";
 import {Item, OrderItem, Employee, EmployeeLunch} from "./models";
 import {currentEmployee, currentMenu, menuItems} from "./index";
 import * as $ from "jquery";
-import {addFavouriteItem, removeFavouriteItem} from "./api";
+import {addFavouriteItem, baseUrl, removeFavouriteItem} from "./api";
 
 const blobPrefix = "data:image/png;base64,";
 
@@ -28,7 +28,7 @@ export function createMenuItem(menuItem: Item) {
         }
     });
     //Setup image
-    imageElement.src = blobPrefix + menuItem.image;
+    imageElement.src = baseUrl + "items/" + menuItem.itemId + "/image";
 
     //Setup span text
     spanElement.textContent = menuItem.name;
@@ -260,7 +260,7 @@ export function initSelectedLunchItems(employeeLunch: EmployeeLunch): void {
     for (let i = 0; i < lunchItems.length; i++) {
         const item = menuItems.find(x => x.itemId === lunchMenuItemIds[i]);
         console.log(item);
-        lunchItemsImages[i].src = blobPrefix + item.image;
+        lunchItemsImages[i].src = baseUrl + "items/" + item.itemId + "/image";;
         lunchItemsNames[i].textContent = item.name;
         if (employeeLunchDaysSelected[i]) {
             lunchItems[i].classList.add("lunch-active");
