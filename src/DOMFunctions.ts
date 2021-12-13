@@ -1,6 +1,6 @@
 import {favouritesButton, shoppingCart} from "./DOMElements";
 import {Item, OrderItem, Employee, EmployeeLunch} from "./models";
-import {currentEmployee, currentMenu, menuItems} from "./index";
+import {currentEmployee, currentMenu, employeeCakes, menuItems} from "./index";
 import * as $ from "jquery";
 import {addFavouriteItem, baseUrl, removeFavouriteItem} from "./api";
 
@@ -8,6 +8,13 @@ const blobPrefix = "data:image/png;base64,";
 
 
 export function createMenuItem(menuItem: Item) {
+
+    if (menuItem.category.name == "Cakes" && !employeeCakes.some(cake => cake.itemId == menuItem.itemId && cake)
+        ) {
+        return;
+    }
+
+
 
     let favouriteIcon: HTMLImageElement = document.createElement("img");
     let buttonElement: HTMLButtonElement = document.createElement("button");

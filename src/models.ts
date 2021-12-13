@@ -22,6 +22,7 @@ export interface EmployeeCake {
     number?: number;
     year?: number;
     limit?: number;
+    day?: string;
     employee?: Employee;
     item?: Item;
     week?: Week;

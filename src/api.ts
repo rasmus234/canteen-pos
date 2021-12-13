@@ -1,10 +1,10 @@
 import {currentEmployee, currentMenu} from "./index";
-import {Employee, EmployeeLunch, Item, LunchMenu} from "./models";
+import {Employee, EmployeeCake, EmployeeLunch, Item, LunchMenu} from "./models";
 
 const baseUrlRemote = "https://canteenapi.herokuapp.com/";
 const baseUrlLocal = "https://localhost:7106/";
 
-export const baseUrl = baseUrlRemote;
+export const baseUrl = baseUrlLocal;
 
 
 export async function loginWithPassword(password: string): Promise<Employee> {
@@ -132,4 +132,20 @@ export async function removeFavouriteItem(itemId: number): Promise<void> {
             "Authorization": "Bearer " + currentEmployee.token
         }
     }).catch(error => console.log(error));
+}
+
+export async function getEmployeeCakes(): Promise<EmployeeCake[]> {
+    let items: EmployeeCake[] = [];
+    await fetch(baseUrl + "employees/cake/"+ currentEmployee.employeeId, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + currentEmployee.token
+        },
+    })
+        .then(data => data.json())
+        .then(data => items = data);
+
+    console.log(items);
+    return items;
 }
