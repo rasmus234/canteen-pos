@@ -9,7 +9,7 @@
   },
   "scripts": {
     "watch": "tsc -w",
-    "start": "parcel index.html",
+    "start": "parcel *.html",
     "build": "parcel build index.html"
   },
   "dependencies": {
