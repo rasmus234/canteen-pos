@@ -98,6 +98,7 @@ export async function setEmployeeLunch(employeeLunch: EmployeeLunch): Promise<bo
         },
         body: JSON.stringify(employeeLunch)
     }).then(value => success = value.ok);
+    console.log("called with", employeeLunch);
     return success;
 }
 

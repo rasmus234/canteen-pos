@@ -1,7 +1,7 @@
 import {filterButtonsByCategory, getSelectedLunchItems, getShoppingCartItems} from "./DOMFunctions";
 import {postOrder, setEmployeeLunch} from "./api";
 import {EmployeeLunch} from "./models";
-import {currentEmployee} from "./index";
+import {currentEmployee, currentMenu} from "./index";
 
 export const breakfastButton = document.getElementById("breakfast-button");
 export const beveragesButton = document.getElementById("beverages-button");
@@ -29,10 +29,11 @@ categoryButtons.forEach(button => button.addEventListener("click", () => {
 }));
 
 confirmLunchButton.addEventListener("click", () => {
+    console.log("clicked");
     const lunchItems = getSelectedLunchItems();
     const employeeLunch: EmployeeLunch = {
         employeeId: currentEmployee.employeeId,
-        lunchMenuId: 2,
+        lunchMenuId: currentMenu.lunchMenuId,
         monday: lunchItems[0],
         tuesday: lunchItems[1],
         wednesday: lunchItems[2],
