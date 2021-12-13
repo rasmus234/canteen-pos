@@ -1,4 +1,4 @@
-import {currentEmployee, currentMenu} from "./index";
+import {currentEmployee, currentMenu} from "./canteen";
 import {Employee, EmployeeCake, EmployeeLunch, Item, LunchMenu} from "./models";
 
 const baseUrlRemote = "https://canteenapi.herokuapp.com/";

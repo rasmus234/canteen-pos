@@ -1,6 +1,6 @@
 import {favouritesButton, shoppingCart} from "./DOMElements";
 import {Item, OrderItem, Employee, EmployeeLunch} from "./models";
-import {currentEmployee, currentMenu, employeeCakes, menuItems} from "./index";
+import {currentEmployee, currentMenu, employeeCakes, menuItems} from "./canteen";
 import * as $ from "jquery";
 import {addFavouriteItem, baseUrl, removeFavouriteItem} from "./api";
 

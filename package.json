@@ -9,8 +9,8 @@
   },
   "scripts": {
     "watch": "tsc -w",
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel *.html",
+    "build": "parcel build *.html"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.0",

@@ -1,7 +1,7 @@
 import {filterButtonsByCategory, getSelectedLunchItems, getShoppingCartItems} from "./DOMFunctions";
 import {postOrder, setEmployeeLunch} from "./api";
 import {EmployeeLunch} from "./models";
-import {currentEmployee, currentMenu} from "./index";
+import {currentEmployee, currentMenu} from "./canteen";
 
 export const breakfastButton = document.getElementById("breakfast-button");
 export const beveragesButton = document.getElementById("beverages-button");
