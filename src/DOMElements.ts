@@ -16,6 +16,16 @@ export const confirmLunchButton = document.getElementById("confirm-lunch-button"
 const categoryButtons = [breakfastButton, beveragesButton, fruitButton, cakeButton, favouritesButton];
 categoryButtons.forEach(button => button.addEventListener("click", () => {
     filterButtonsByCategory(button.id.split("-")[0]);
+    
+    for (const categoryButton of categoryButtons) {
+        if (categoryButton.id == button.id) {
+            categoryButton.style.backgroundColor = "green";
+        }
+        else {
+            categoryButton.style.backgroundColor = "";
+        }
+    }
+    
 }));
 
 confirmLunchButton.addEventListener("click", () => {

@@ -11,6 +11,7 @@ import "bootstrap";
 import "./css/custom.sass";
 import "./css/styles.css";
 import {Employee, Item, LunchMenu} from "./models";
+import {favouritesButton} from "./DOMElements";
 
 export let currentEmployee: Employee;
 export let currentMenu: LunchMenu;
@@ -32,14 +33,16 @@ async function init(password: string): Promise<void> {
     }
     refreshNavBar();
     await initMenuItems();
+    
     refreshNavBar();
     const currentMenuCall = await getCurrentMenu();
     currentMenu = currentMenuCall;
 
     const currentEmployeeLunch = await getEmployeeLunch();
     initSelectedLunchItems(currentEmployeeLunch);
-
-    refreshNavBar();
+    
+    refreshNavBar()
+    favouritesButton.click();
 }
 
 async function initMenuItems(): Promise<void> {
