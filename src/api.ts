@@ -4,7 +4,7 @@ import {Employee, EmployeeCake, EmployeeLunch, Item, LunchMenu} from "./models";
 const baseUrlRemote = "https://canteenapi.herokuapp.com/";
 const baseUrlLocal = "https://localhost:7106/";
 
-export const baseUrl = baseUrlRemote;
+export const baseUrl = baseUrlLocal;
 
 
 export async function loginWithPassword(password: string): Promise<Employee> {
@@ -110,7 +110,8 @@ export async function getEmployeeLunch(): Promise<EmployeeLunch> {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + currentEmployee.token
         }
-    }).then(value => response = value.json());
+    }).then(value => response = value.json())
+        .catch(error => console.error(error));
     return response;
 }
 
