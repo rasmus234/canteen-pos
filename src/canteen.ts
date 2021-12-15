@@ -44,12 +44,13 @@ export async function initFromOtherPage(employee:Employee){
 
 
 export async function init(password: string): Promise<void> {
+    
     const employee = await loginWithPassword(password);
     if (employee) {
         currentEmployee = employee;
     } else {
-        alert("Wrong password");
-        document.location.reload();
+        alert("Unknown user, please try again");
+        location.href = "/index.html";
     }
     refreshNavBar();
     await getEmployeeCakes().then(cakes => employeeCakes = cakes);
