@@ -1,11 +1,11 @@
-import {filterButtonsByCategory, getSelectedLunchItems, getShoppingCartItems} from "./DOMFunctions";
+import {filterButtonsByCategory, getSelectedLunchItems, getShoppingCartItems, logOut} from "./DOMFunctions";
 import {postOrder, setEmployeeLunch} from "./api";
 import {EmployeeLunch} from "./models";
 import {currentEmployee, currentMenu} from "./canteen";
 
 export const breakfastButton = document.getElementById("breakfast-button");
 export const beveragesButton = document.getElementById("beverages-button");
-export const fruitButton = document.getElementById("fruit-button");
+export const fruitButton = document.getElementById("fruits-button");
 export const cakeButton = document.getElementById("cakes-button");
 export const favouritesButton = document.getElementById("favourite-button");
 export const logoutButton = document.getElementById("logout-button");
@@ -58,5 +58,5 @@ checkoutButton.addEventListener("click", () => {
 
 logoutButton.addEventListener("click", () => {
     console.log("Logout clicked");
-    document.location.reload();
+    logOut();
 });

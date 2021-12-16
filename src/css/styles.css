@@ -47,7 +47,7 @@
 
 
 .menu-item {
-    
+    display: none;
     margin-bottom: 12px;
     margin-right: 1%;
     width: 25vw;
@@ -76,6 +76,7 @@
 
 .lunch-card{
     width: 100%;
+    
     border-color: grey;
     margin-bottom: 2%;
     background-color: lightgrey;
@@ -86,11 +87,14 @@
 
 
 .lunch-card > *{
-    display: inline-block;
+    margin: auto;
+    display: block;
+    text-align: center;
+    justify-content: center;
 }
 .lunch-card-img-top{
-    height: 90%;
-    width: 90%;
+    max-height: 100px;
+    max-width: 90%;
 }
 
 .lunch-card-weekday{

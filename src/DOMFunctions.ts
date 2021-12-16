@@ -254,6 +254,11 @@ export function getSelectedLunchItems(): boolean[] {
     return selectedLunchItems;
 }
 
+export function logOut(){
+    localStorage.removeItem("password");
+    window.location.href = "index.html";
+}
+
 export function initSelectedLunchItems(employeeLunch: EmployeeLunch): void {
 
     const lunchItems: HTMLDivElement[] = document.getElementsByClassName('lunch-card') as unknown as HTMLDivElement[];
