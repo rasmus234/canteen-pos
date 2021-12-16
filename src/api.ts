@@ -110,7 +110,8 @@ export async function getEmployeeLunch(): Promise<EmployeeLunch> {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + currentEmployee.token
         }
-    }).then(value => response = value.json());
+    }).then(value => response = value.json())
+        .catch(error => console.error(error));
     return response;
 }
 
@@ -149,3 +150,4 @@ export async function getEmployeeCakes(): Promise<EmployeeCake[]> {
     console.log(items);
     return items;
 }
+

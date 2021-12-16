@@ -60,7 +60,7 @@ export function createMenuItem(menuItem: Item) {
     buttonElement.addEventListener("click", (ev) => {
         createShoppingCartItem(buttonElement);
         itemChosenEffect(buttonElement, buttonElement.offsetLeft, buttonElement.offsetTop);
-        
+
     });
 
     const menuItems = document.getElementById('menu-items-div') as HTMLDivElement;
@@ -125,20 +125,20 @@ function itemChosenEffect(element: HTMLElement, x, y) {
         elemClone.remove();
         updateCounter();
 
-        
-        
-        
-        
+
+
+
+
         $("#shopping-cart").animate({
             height: "25px"
         }, 75, "linear", function () {
-            
+
             $("#shopping-cart").animate({
                 height: "50px"
             }, 75, "linear", function(){
             });
         });
-    
+
 
 
     });
@@ -266,7 +266,9 @@ export function initSelectedLunchItems(employeeLunch: EmployeeLunch): void {
     const lunchItemsNames = document.getElementsByClassName('lunch-card-text') as unknown as HTMLSpanElement[];
 
     const lunchMenuItemIds = [currentMenu.mondayItemId, currentMenu.tuesdayItemId, currentMenu.wednesdayItemId, currentMenu.thursdayItemId, currentMenu.fridayItemId];
-    const employeeLunchDaysSelected = [employeeLunch.monday, employeeLunch.tuesday, employeeLunch.wednesday, employeeLunch.thursday, employeeLunch.friday];
+
+    let employeeLunchDaysSelected = [];
+    employeeLunchDaysSelected = [employeeLunch.monday, employeeLunch.tuesday, employeeLunch.wednesday, employeeLunch.thursday, employeeLunch.friday];
 
     console.log(menuItems);
     for (let i = 0; i < lunchItems.length; i++) {

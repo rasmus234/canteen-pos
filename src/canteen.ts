@@ -18,30 +18,12 @@ export let currentMenu: LunchMenu;
 export let employeeCakes:EmployeeCake[] = [];
 export let menuItems: Item[] = [];
 
-// let password = prompt("Enter password");
+
 
 const password = sessionStorage.getItem("password");
-
 console.log(password);
 
 init(password);
-
-export async function initFromOtherPage(employee:Employee){
-    refreshNavBar();
-    await getEmployeeCakes().then(cakes => employeeCakes = cakes);
-    await initMenuItems();
-
-    refreshNavBar();
-    const currentMenuCall = await getCurrentMenu();
-    currentMenu = currentMenuCall;
-
-    const currentEmployeeLunch = await getEmployeeLunch();
-    initSelectedLunchItems(currentEmployeeLunch);
-
-    refreshNavBar()
-    favouritesButton.click();
-}
-
 
 export async function init(password: string): Promise<void> {
     
