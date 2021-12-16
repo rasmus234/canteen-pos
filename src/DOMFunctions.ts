@@ -18,7 +18,8 @@ export function createMenuItem(menuItem: Item) {
 
     let favouriteIcon: HTMLImageElement = document.createElement("img");
     let buttonElement: HTMLButtonElement = document.createElement("button");
-    let spanElement: HTMLSpanElement = document.createElement("span");
+    let spanPriceElement: HTMLSpanElement = document.createElement("span");
+    let spanNameElement: HTMLSpanElement = document.createElement("span");
     let imageElement: HTMLImageElement = document.createElement("img");
 
     favouriteIcon.addEventListener("click", () => {
@@ -36,9 +37,13 @@ export function createMenuItem(menuItem: Item) {
     });
     //Setup image
     imageElement.src = baseUrl + "items/" + menuItem.itemId + "/image";
-
-    //Setup span text
-    spanElement.textContent = menuItem.name;
+    
+    //Setup span price text
+    spanPriceElement.className = "price";
+    spanPriceElement.innerText = menuItem.price.toString() + " kr";
+    
+    //Setup span name text
+    spanNameElement.textContent = menuItem.name;
 
     //Setup button
     buttonElement.className = "btn btn-primary btn-lg menu-item";
@@ -66,7 +71,8 @@ export function createMenuItem(menuItem: Item) {
     const menuItems = document.getElementById('menu-items-div') as HTMLDivElement;
     buttonElement.append(favouriteIcon);
     buttonElement.append(imageElement);
-    buttonElement.append(spanElement);
+    buttonElement.append(spanPriceElement);
+    buttonElement.append(spanNameElement);
 
     menuItems.append(buttonElement);
 
@@ -171,13 +177,12 @@ export function filterButtonsByCategory(category: string) {
 }
 
 function createShoppingCartItem(buttonElement: HTMLButtonElement) {
-    let itemClone = buttonElement.cloneNode() as HTMLButtonElement;
-    let imageClone = buttonElement.children[0].cloneNode() as HTMLImageElement;
+    let itemClone = buttonElement.cloneNode(false) as HTMLButtonElement;
     let spanClone = buttonElement.children[1].cloneNode() as HTMLSpanElement;
     itemClone.className = "btn btn-primary shopping-cart-item";
-
+    
+    
     shoppingCart?.append(itemClone);
-    itemClone.append(imageClone);
     itemClone.append(spanClone);
 
     itemClone.addEventListener("click", (ev) => {
