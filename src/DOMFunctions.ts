@@ -1,5 +1,5 @@
-import {favouritesButton, shoppingCart} from "./DOMElements";
-import {Item, OrderItem, Employee, EmployeeLunch} from "./models";
+import {shoppingCart} from "./DOMElements";
+import {Employee, EmployeeLunch, Item} from "./models";
 import {currentEmployee, currentMenu, employeeCakes, menuItems} from "./canteen";
 import * as $ from "jquery";
 import {addFavouriteItem, baseUrl, removeFavouriteItem} from "./api";
@@ -10,10 +10,9 @@ const blobPrefix = "data:image/png;base64,";
 export function createMenuItem(menuItem: Item) {
 
     if (menuItem.category.name == "Cakes" && !employeeCakes.some(cake => cake.itemId == menuItem.itemId && cake)
-        ) {
+    ) {
         return;
     }
-
 
 
     let favouriteIcon: HTMLImageElement = document.createElement("img");
@@ -126,19 +125,15 @@ function itemChosenEffect(element: HTMLElement, x, y) {
         updateCounter();
 
 
-
-
-
         $("#shopping-cart").animate({
             height: "25px"
         }, 75, "linear", function () {
 
             $("#shopping-cart").animate({
                 height: "50px"
-            }, 75, "linear", function(){
+            }, 75, "linear", function () {
             });
         });
-
 
 
     });
@@ -160,8 +155,7 @@ export function filterButtonsByCategory(category: string) {
         for (let i = 0; i < buttons.length; i++) {
             if (buttons[i].getAttribute("data-favourite") === "true") {
                 buttons[i].style.display = "block";
-            }
-            else {
+            } else {
                 buttons[i].style.display = "none";
             }
         }
@@ -213,7 +207,7 @@ export function getShoppingCartItems(): Item[] {
     for (let i = 0; i < shoppingCartItems.length; i++) {
         let item: Item = {
             itemId: parseInt(shoppingCartItems[i].getAttribute("data-item-id")),
-            name: shoppingCartItems[i].children[1].textContent,
+            name: "none",
             price: parseFloat(shoppingCartItems[i].getAttribute("data-price")),
             category: {
                 name: shoppingCartItems[i].getAttribute("data-category")
@@ -240,8 +234,6 @@ export function refreshNavBar(): void {
 export function getSelectedLunchItems(): boolean[] {
 
     const lunchItems: HTMLButtonElement[] = document.getElementsByClassName('lunch-card') as unknown as HTMLButtonElement[];
-
-    console.log(lunchItems);
     let selectedLunchItems: boolean[] = [];
 
     for (let i = 0; i < lunchItems.length; i++) {
@@ -254,7 +246,7 @@ export function getSelectedLunchItems(): boolean[] {
     return selectedLunchItems;
 }
 
-export function logOut(){
+export function logOut() {
     localStorage.removeItem("password");
     window.location.href = "index.html";
 }
@@ -267,19 +259,14 @@ export function initSelectedLunchItems(employeeLunch: EmployeeLunch): void {
 
     const lunchMenuItemIds = [currentMenu.mondayItemId, currentMenu.tuesdayItemId, currentMenu.wednesdayItemId, currentMenu.thursdayItemId, currentMenu.fridayItemId];
 
-    let employeeLunchDaysSelected = [];
-    employeeLunchDaysSelected = [employeeLunch.monday, employeeLunch.tuesday, employeeLunch.wednesday, employeeLunch.thursday, employeeLunch.friday];
+    let employeeLunchDaysSelected = [employeeLunch.monday, employeeLunch.tuesday, employeeLunch.wednesday, employeeLunch.thursday, employeeLunch.friday];
 
-    console.log(menuItems);
     for (let i = 0; i < lunchItems.length; i++) {
         const item = menuItems.find(x => x.itemId === lunchMenuItemIds[i]);
-        console.log(item);
-        lunchItemsImages[i].src = baseUrl + "items/" + item.itemId + "/image";;
+        lunchItemsImages[i].src = baseUrl + "items/" + item.itemId + "/image";
         lunchItemsNames[i].textContent = item.name;
         if (employeeLunchDaysSelected[i]) {
             lunchItems[i].classList.add("lunch-active");
         }
     }
-
-
 }

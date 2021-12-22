@@ -1,11 +1,4 @@
-import {
-    createMenuItem,
-    filterButtonsByCategory,
-    getTotalItems,
-    getTotalPrice,
-    initSelectedLunchItems,
-    refreshNavBar
-} from "./DOMFunctions";
+import {createMenuItem, initSelectedLunchItems, refreshNavBar} from "./DOMFunctions";
 import {getCurrentMenu, getEmployeeCakes, getEmployeeLunch, getMenuItems, loginWithPassword} from "./api";
 import "bootstrap";
 import "./css/custom.sass";
@@ -15,18 +8,15 @@ import {favouritesButton} from "./DOMElements";
 
 export let currentEmployee: Employee;
 export let currentMenu: LunchMenu;
-export let employeeCakes:EmployeeCake[] = [];
+export let employeeCakes: EmployeeCake[] = [];
 export let menuItems: Item[] = [];
 
 
-
 const password = sessionStorage.getItem("password");
-console.log(password);
-
 init(password);
 
 export async function init(password: string): Promise<void> {
-    
+
     const employee = await loginWithPassword(password);
     if (employee) {
         currentEmployee = employee;
@@ -37,14 +27,14 @@ export async function init(password: string): Promise<void> {
     refreshNavBar();
     await getEmployeeCakes().then(cakes => employeeCakes = cakes);
     await initMenuItems();
-    
+
     refreshNavBar();
     const currentMenuCall = await getCurrentMenu();
     currentMenu = currentMenuCall;
 
     const currentEmployeeLunch = await getEmployeeLunch();
     initSelectedLunchItems(currentEmployeeLunch);
-    
+
     refreshNavBar()
     favouritesButton.click();
 }

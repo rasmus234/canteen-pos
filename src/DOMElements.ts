@@ -16,20 +16,18 @@ export const confirmLunchButton = document.getElementById("confirm-lunch-button"
 const categoryButtons = [breakfastButton, beveragesButton, fruitButton, cakeButton, favouritesButton];
 categoryButtons.forEach(button => button.addEventListener("click", () => {
     filterButtonsByCategory(button.id.split("-")[0]);
-    
+
     for (const categoryButton of categoryButtons) {
         if (categoryButton.id == button.id) {
             categoryButton.style.backgroundColor = "green";
-        }
-        else {
+        } else {
             categoryButton.style.backgroundColor = "";
         }
     }
-    
+
 }));
 
 confirmLunchButton.addEventListener("click", () => {
-    console.log("clicked");
     const lunchItems = getSelectedLunchItems();
     const employeeLunch: EmployeeLunch = {
         employeeId: currentEmployee.employeeId,
@@ -40,23 +38,20 @@ confirmLunchButton.addEventListener("click", () => {
         thursday: lunchItems[3],
         friday: lunchItems[4],
     };
-   let result = setEmployeeLunch(employeeLunch);
-   
-   if (!result){
-       alert("Something went wrong, please try again");
-   }
+    let result = setEmployeeLunch(employeeLunch);
+
+    if (!result) {
+        alert("Something went wrong, please try again");
+    }
 });
 
 checkoutButton.addEventListener("click", () => {
-    console.log("Checkout clicked");
     postOrder(getShoppingCartItems()).then((response) => {
-        console.log(response);
         alert("Order placed successfully! \nOrder ID: " + response.orderId);
         document.location.reload();
     });
 });
 
 logoutButton.addEventListener("click", () => {
-    console.log("Logout clicked");
     logOut();
 });

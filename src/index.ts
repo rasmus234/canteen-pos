@@ -6,8 +6,6 @@ onScan.attachTo(document,
         onScan: (data) => {
             let pass = data
             pass = pass.trim();
-            console.log(pass);
-
             sessionStorage.setItem("password", pass);
             location.href = "/canteen.html";
         }

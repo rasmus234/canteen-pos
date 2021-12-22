@@ -8,8 +8,6 @@ export const baseUrl = baseUrlRemote;
 
 
 export async function loginWithPassword(password: string): Promise<Employee> {
-    console.log("logging in with password");
-    console.log("ye");
     let tokenResponse = await fetch(baseUrl + "login", {
         method: "POST",
         headers: {
@@ -17,17 +15,12 @@ export async function loginWithPassword(password: string): Promise<Employee> {
         },
         body: JSON.stringify({password: password})
     });
-
     if (tokenResponse.status === 401) {
         return null;
     }
     const token = await tokenResponse.json().then(data => data.token);
-    console.log(token);
-    console.log("logged in");
-
     const employee = await getEmployeeFromToken(token);
     employee.token = token;
-
     return employee;
 }
 
@@ -98,7 +91,6 @@ export async function setEmployeeLunch(employeeLunch: EmployeeLunch): Promise<bo
         },
         body: JSON.stringify(employeeLunch)
     }).then(value => success = value.ok);
-    console.log("called with", employeeLunch);
     return success;
 }
 
@@ -137,7 +129,7 @@ export async function removeFavouriteItem(itemId: number): Promise<void> {
 
 export async function getEmployeeCakes(): Promise<EmployeeCake[]> {
     let items: EmployeeCake[] = [];
-    await fetch(baseUrl + "employees/cake/"+ currentEmployee.employeeId, {
+    await fetch(baseUrl + "employees/cake/" + currentEmployee.employeeId, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -146,8 +138,6 @@ export async function getEmployeeCakes(): Promise<EmployeeCake[]> {
     })
         .then(data => data.json())
         .then(data => items = data);
-
-    console.log(items);
     return items;
 }
 
